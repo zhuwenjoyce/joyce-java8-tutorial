@@ -1,4 +1,4 @@
-package com.joyce.java8.demo2;
+package com.joyce.java8.demo2_Stream;
 
 import org.junit.Test;
 

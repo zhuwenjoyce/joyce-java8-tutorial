@@ -1,8 +1,7 @@
-package com.joyce.java8.demo2;
+package com.joyce.java8.demo2_Stream;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

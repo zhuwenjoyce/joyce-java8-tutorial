@@ -1,11 +1,8 @@
-package com.joyce.java8.demo2;
+package com.joyce.java8.demo2_Stream;
 
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Demo2_Stream_sorted {

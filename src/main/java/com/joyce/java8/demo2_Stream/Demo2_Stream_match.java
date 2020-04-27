@@ -1,12 +1,10 @@
-package com.joyce.java8.demo2;
+package com.joyce.java8.demo2_Stream;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public class Demo2_Stream_match {
     List<String> memberNames = new ArrayList<>();
