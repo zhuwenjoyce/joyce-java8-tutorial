@@ -13,15 +13,16 @@ public class Demo2_Stream_parallelStream {
     public void test_parallelStream背后的男人ForkJoinPool() throws InterruptedException {
         // 构造一个10000个元素的集合
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10; i++) {
             list.add(i);
         }
         // 统计并行执行list的线程
         Set<Thread> threadSet = new CopyOnWriteArraySet<>();
-        // 并行执行
+        // 每一次forEach都启用一个新线程执行，并不是list的每个元素启动一个新线程执行
         list.parallelStream().forEach(integer -> {
             Thread thread = Thread.currentThread();
-            // System.out.println(thread);
+            thread.setName("thread--" + integer);
+             System.out.println("::: "+thread.getName());
             // 统计并行执行list的线程
             threadSet.add(thread);
         });

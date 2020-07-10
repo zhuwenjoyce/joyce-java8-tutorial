@@ -1,5 +1,6 @@
 package com.joyce.java8.demo2_Stream;
 
+import com.joyce.java8.Demo9_PredicateFilter.Employee;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,27 +24,29 @@ public class Demo2_Stream_flatMap {
     }
     @Test
     public void test_flatMap函数其实是分开每个对象执行一次(){
-        List<String[]> eggs = new ArrayList<>();
+        List<String[]> arrayList = new ArrayList<>();
         // 第一箱鸡蛋
-        eggs.add(new String[]{"鸡蛋_1", "鸡蛋_1", "鸡蛋_1", "鸡蛋_1", "鸡蛋_1"});
+        String[] eggArr1 = new String[]{"鸡蛋_1", "鸡蛋_1", "鸡蛋_1", "鸡蛋_1", "鸡蛋_1"};
+        arrayList.add(eggArr1);
         // 第二箱鸡蛋
-        eggs.add(new String[]{"鸡蛋_2", "鸡蛋_2", "鸡蛋_2", "鸡蛋_2", "鸡蛋_2"});
+        String[] eggArr2 = new String[]{"鸡蛋_2", "鸡蛋_2", "鸡蛋_2", "鸡蛋_2", "鸡蛋_2"};
+        arrayList.add(eggArr2);
 
         // 自增生成组编号
         AtomicInteger group = new AtomicInteger(1);
         // 自增生成学生编号
         AtomicInteger student = new AtomicInteger(1);
-        eggs.stream()
-                .map(x -> Arrays.stream(x).map(y -> y.replace("鸡", "煎")))
-                .forEach(x -> System.out.println("组" + group.getAndIncrement() + ":" + Arrays.toString(x.toArray())));
+        arrayList.stream()
+                .map(eggArr -> Arrays.stream(eggArr).map(egg -> egg.replace("鸡", "煎")))
+                .forEach(x -> System.out.println("用map函数，第" + group.getAndIncrement() + "次遍历:" + Arrays.toString(x.toArray())));
          /*
          控制台打印：------------
          组1:[煎蛋_1, 煎蛋_1, 煎蛋_1, 煎蛋_1, 煎蛋_1]
          组2:[煎蛋_2, 煎蛋_2, 煎蛋_2, 煎蛋_2, 煎蛋_2]
           */
-        eggs.stream()
-                .flatMap(x -> Arrays.stream(x).map(y -> y.replace("鸡", "煎")))
-                .forEach(x -> System.out.println("学生" + (student.getAndIncrement()) + ":" + x));
+        arrayList.stream()
+                .flatMap(eggArr -> Arrays.stream(eggArr).map(y -> y.replace("鸡", "煎")))
+                .forEach(eggArr -> System.out.println("用flatMap函数，当前正在遍历："+eggArr+", 遍历次数：" + (student.getAndIncrement())));
          /*
          控制台打印：------------
          学生1:煎蛋_1
@@ -66,4 +69,17 @@ public class Demo2_Stream_flatMap {
                 .collect(Collectors.toList());
         System.out.println(listOfAllChars); // [a, b, c, d, e, f, g, h]
     }
+
+    @Test
+    public void test_flatMap(){
+        List<Employee> list = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(new Employee().setId(i).setGender(""+i));
+        }
+        list.stream().flatMap(e -> {
+            System.out.println("当前线程："+Thread.currentThread().getName() + "， Gender: " + e.getGender());
+            return null;
+        });
+    }
+
 }

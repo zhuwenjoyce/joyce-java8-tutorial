@@ -24,20 +24,23 @@ public class User {
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public User setId(String id) {
 		this.id = id;
+		return this;
 	}
 	public Integer getAge() {
 		return age;
 	}
-	public void setAge(Integer age) {
+	public User setAge(Integer age) {
 		this.age = age;
+		return this;
 	}
 	public String getRemark() {
 		return remark;
 	}
-	public void setRemark(String remark) {
+	public User setRemark(String remark) {
 		this.remark = remark;
+		return this;
 	}
 
 	public String getName() {
